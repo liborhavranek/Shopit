@@ -1,0 +1,59 @@
+$blue-color: blue;
+$check-form-color: green;
+$check-form-red: red;
+ 
+p {
+    color: $blue-color;
+}
+
+.costumer_email_check{
+    color: $check-form-red;
+}
+
+.costumer_username_check{
+    color: $check-form-red;
+}
+
+.costumer_phone_check{
+    color: $check-form-red;
+}
+
+.check-tag{
+    color: $check-form-color;
+    visibility: hidden;
+}
+
+.check-tag-username{
+    color: $check-form-color;
+    visibility: hidden;
+}
+
+
+.check-tag-phone{
+    color: $check-form-color;
+    visibility: hidden;
+}
+
+
+.flag{
+    width: 40px;
+    height: 40px;
+}
+
+.check-tag-password-one{
+    color: $check-form-color;
+    visibility: hidden;
+}
+
+.check-tag-password-two{
+    color: $check-form-color;
+    visibility: hidden;
+}
+
+.costumer_password_one_check{
+    color: $check-form-red;
+}
+
+.costumer_password_two_check{
+    color: $check-form-red;
+}

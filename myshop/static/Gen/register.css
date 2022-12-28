@@ -1,0 +1,41 @@
+p {
+  color: blue; }
+
+.costumer_email_check {
+  color: red; }
+
+.costumer_username_check {
+  color: red; }
+
+.costumer_phone_check {
+  color: red; }
+
+.check-tag {
+  color: green;
+  visibility: hidden; }
+
+.check-tag-username {
+  color: green;
+  visibility: hidden; }
+
+.check-tag-phone {
+  color: green;
+  visibility: hidden; }
+
+.flag {
+  width: 40px;
+  height: 40px; }
+
+.check-tag-password-one {
+  color: green;
+  visibility: hidden; }
+
+.check-tag-password-two {
+  color: green;
+  visibility: hidden; }
+
+.costumer_password_one_check {
+  color: red; }
+
+.costumer_password_two_check {
+  color: red; }

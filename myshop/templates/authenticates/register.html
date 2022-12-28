@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container d-flex justify-content-center">
+<div class="text-center w-50">
+
+
+<h1 class="registrace">Registrace zákazníka</h1>
+
+<form method="POST">
+
+    <!-- emial label and input -->
+  <div class="mb-3">
+    <label for="email" class="form-label">Email:</label>
+    <div class="row">
+    <div class="col-11">
+    <input type="text" class="form-control" name="email"
+      id="registration_email" aria-describedby="emailHelp" placeholder="Přihlašovací email"/>
+    </div>
+      <div class="col-1 check-tag d-flex align-items-center"><i class="fa-sharp fa-solid fa-circle-check fa-xl"></i></div>
+    </div>
+      <div class="costumer_email_check text-start" id="costumer_email_check_id"><small class=" email-used"></small></div>
+  </div>
+
+<!-- ---------------------------------------------------------------------------------------- -->
+
+<!-- -----------------------username label and input---------------------------------------  -->
+
+
+  <div class="mb-3">
+    <label for="username" class="form-label">Přihlašovací jméno:</label>
+    <div class="row">
+        <div class="col-11">
+    <input type="text" class="form-control" name="username" 
+    id="registration_username" aria-describedby="emailHelp" placeholder="Přihlašovací jméno"/>
+    </div>
+    <div class="col-1 check-tag-username d-flex align-items-center"><i class="fa-sharp fa-solid fa-circle-check fa-xl"></i></div>
+    </div>
+    <div class="costumer_username_check text-start" id="costumer_username_check_id"><small class=" username-used"></small></div>
+  </div>
+
+
+
+ <!-------------------------phone number label ------------------------------------>
+
+
+
+  <div class="mb-3">
+    <label for="phone" class="form-label">Telefonní číslo:</label>
+<div class="row">
+    <div class="col-1 ps-2">
+        <img src="{{url_for('static', filename='images/czech-flag.png')}}" class="flag">
+    
+    </div>
+<div class="col-3">
+    <select class="form-select" aria-label="Default select example" id="flag-selector" name="phone_code">
+        <option value="+421">+421</option>
+        <option value="+420">+420</option>
+      </select>
+</div>
+
+<div class="col-7">
+    <input type="text" class="form-control" name="phone" pattern="[0-9]*"
+    id="registration_phone" aria-describedby="emailHelp" placeholder="Tel číslo" maxlength="9"/>
+</div>
+<div class="col-1 check-tag-phone d-flex align-items-center"><i class="fa-sharp fa-solid fa-circle-check fa-xl"></i></div>
+</div>
+<div class="costumer_phone_check text-start" id="costumer_phone_check_id"><small class=" phone-used"></small></div>
+  </div>
+
+
+
+
+<!-- -----------------------------password 1 label ---------------------------- -->
+
+
+  <div class="mb-3">
+    <label for="Password1" class="form-label">Heslo:</label>
+    <div class="row">
+    <div class="col-11">
+    <input type="password" name="password1" class="form-control"
+      id="Password1" placeholder="Heslo"/>
+    </div>
+    <div class="col-1 check-tag-password-one d-flex align-items-center"><i class="fa-sharp fa-solid fa-circle-check fa-xl"></i></div>
+    </div>
+    <div class="costumer_password_one_check text-start" id="costumer_password_one_check_id"><small class=" password-one-used"></small></div>
+</div>
+
+
+
+
+
+  <div class="mb-3">
+    <label for="Password2" class="form-label">Heslo:</label>
+    <div class="row">
+        <div class="col-11">
+    <input type="password" name="password2" class="form-control"
+      id="Password2" placeholder="Potvrdit Heslo"/>
+  </div>
+  <div class="col-1 check-tag-password-two d-flex align-items-center"><i class="fa-sharp fa-solid fa-circle-check fa-xl"></i></div>
+</div>
+<div class="costumer_password_two_check text-start" id="costumer_password_two_check_id"><small class=" password-one-used"></small></div>
+</div>
+
+
+
+
+
+
+
+
+
+  <div class="mb-3">
+    <label for="dodej_phone" class="form-label">Telefonní číslo:</label>
+    <input type="text" name="dodej_phone" class="form-control"
+      id="dodej_phone" placeholder="Tel cislo"/>
+  </div>
+
+  <button type="submit" class="btn btn-warning">Registrovat</button>
+</form>
+
+</div>
+</div>
+{% endblock content %}
