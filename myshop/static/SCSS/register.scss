@@ -3,12 +3,31 @@ $check-form-color: green;
 $check-form-red: red;
  
 
+body, html {
+    height: 100%;
+    margin: 0;
+  }
+
 .register-form-container{
-    background-image: url('../images/formbg7.jpg');
+    background-image: url('../images/formbg8.jpg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-attachment: fixed;
+    height: auto;
 }
+
+.login-form-container{
+    background-image: url('../images/formbg8.jpg');
+
+    /* Full height */
+    height: 100%; 
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
 
 
 .form-div{
@@ -225,3 +244,19 @@ $check-form-red: red;
     visibility: hidden;
 }
 
+
+
+.shop-span{
+    font-size: 2vw;
+}
+.it-span{
+    font-size: 3vw;
+}
+
+
+
+
+
+.navbar{
+    background-color: #9EFFFF;
+}

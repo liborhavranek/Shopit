@@ -6,16 +6,15 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint('auth', __name__, template_folder='templates/authenticates')
 
-@auth.route('/login')
-def login():
-    return render_template('login.html')
 
 
 @auth.route('/auth')
 def authenticate():
     return render_template('auth.html')
 
-
+@auth.route('/test')
+def test():
+    return render_template('test.html')
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
@@ -163,3 +162,26 @@ def check_username():
     else:
         return 'available'
 
+
+
+
+
+@auth.route("/login", methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form.get("email")
+        password = request.form.get("password")
+        print(email)
+        print(password)
+        costumer = Costumer.query.filter_by(email=email).first()
+        if costumer:
+            if check_password_hash(costumer.password, password):
+                flash("Úspěšně jsi se přihlásil", category='success')
+                login_user(costumer, remember=True)
+                return render_template("auth.html", costumer=current_user)
+            else:
+                flash('Zadal jsi nesprávné heslo', category='error')
+        else:
+            flash('Email neexistuje', category='error')
+
+    return render_template("login.html", costumer=current_user)
