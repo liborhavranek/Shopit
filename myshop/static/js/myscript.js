@@ -9,19 +9,3 @@
 // }
 
 
-const emailInput = document.getElementById('email');
-const resultDiv = document.getElementById('result');
-
-emailInput.addEventListener('change', () => {
-  const email = emailInput.value;
-
-  // send an AJAX request to the server to check the email
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', `/check_email/${email}`);
-  xhr.onload = () => {
-    if (xhr.status === 200) {
-      resultDiv.innerHTML = xhr.responseText;
-    }
-  };
-  xhr.send();
-});

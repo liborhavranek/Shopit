@@ -36,7 +36,7 @@ def register():
         faktura_street = request.form.get("faktura_street")
         faktura_zipcode = request.form.get("faktura_zipcode")
         
-        #_____________didaci udaje ___________________
+        #_____________dodaci udaje ___________________
         dodej_first_name = request.form.get("dodej_first_name")
         dodej_last_name = request.form.get("dodej_last_name")
         dodej_company = request.form.get("dodej_company")
@@ -44,6 +44,7 @@ def register():
         dodej_street = request.form.get("dodej_street")
         dodej_zipcode = request.form.get("dodej_zipcode")
         dodej_info = request.form.get("dodej_info")
+        dodej_phone_code = request.form.get('dodej_phone_code')
         dodej_phone = request.form.get("dodej_phone")
         
         #_____________firemni udaje ______________________
@@ -72,6 +73,40 @@ def register():
             flash('Tento email nelze použít', category='error')
         elif len(phone) != 9:
             flash("telefonní číslo musí mít 9 čísel", category='error')
+        elif len(faktura_first_name) == 1 or len(faktura_first_name) == 2:
+            flash('jméno musí mít alespoň tři znaky', category='error')
+        elif len(faktura_last_name) == 1:
+            flash('Příjmení musí mít alespoň dva znaky', category='error')
+        elif len(faktura_city) == 1:
+            flash('Město musí být dlouhé alespoň dva znaky', category='error')
+        elif len(faktura_street) == 1:
+            flash('Název ulice musí být dlouhý alespoň dvaznaky', category='error')
+        elif len(faktura_zipcode) > 0 and len(faktura_zipcode) < 5:
+            flash('PSČ musí mít 5 znaků', category='error')
+        elif len(dodej_first_name) == 1 or len(dodej_first_name) == 2:
+            flash('jméno musí mít alespoň tři znaky', category='error')
+        elif len(dodej_last_name) == 1:
+            flash('Příjmení musí mít alespoň dva znaky', category='error')
+        elif len(dodej_company) == 1:
+            flash('Jméno firmy musí mít alespoň dva znaky', category='error')
+        elif len(dodej_city) == 1:
+            flash('Město musí být dlouhé alespoň dva znaky', category='error')
+        elif len(dodej_street) == 1:
+            flash('Název ulice musí být dlouhý alespoň dvaznaky', category='error')
+        elif len(dodej_zipcode) > 0 and len(dodej_zipcode) < 5:
+            flash('PSČ musí mít 5 znaků', category='error')
+        elif len(dodej_info) == 1:
+            flash('Název ulice musí být dlouhý alespoň dvaznaky', category='error')
+        elif len(dodej_phone) > 0 and len(dodej_phone) < 9:
+            flash("telefonní číslo musí mít 9 čísel", category='error')
+        elif len(firma_ico) > 0 and len(firma_ico) < 8:
+            flash("IČO musí být dlouhé 8 čísel", category='error')
+        elif len(firma_dic) > 0 and len(firma_dic) < 10:
+            flash("DIČ musí být dlouhé alespoň 10 znaků", category='error')
+        elif len(firma_bank_acc) > 0 and len(firma_bank_acc) < 6:
+            flash("Bankovní číslo musí mít alespoň 6 čísel", category='error')
+        elif len(firma_bank_acc) > 0 and len(firma_bank_acc) < 4:
+            flash("Čislo baky musí mít 4 čísla", category='error')
         else:
             new_costumer = Costumer(email=email,
                                     username=username,
@@ -90,6 +125,7 @@ def register():
                                     dodej_zipcode = dodej_zipcode,
                                     dodej_info = dodej_info,
                                     dodej_phone = dodej_phone,
+                                    dodej_phone_code =dodej_phone_code,
                                     firma_ico = firma_ico,
                                     firma_dic = firma_dic,
                                     firma_bank_acc = firma_bank_acc,

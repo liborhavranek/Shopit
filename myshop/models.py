@@ -31,6 +31,7 @@ class Costumer(db.Model, UserMixin):
     dodej_street = db.Column(db.String(50), unique=False, nullable=True)
     dodej_zipcode = db.Column(db.String(50), unique=False, nullable=True)
     dodej_info = db.Column(db.String(50), unique=False, nullable=True)
+    dodej_phone_code = db.Column(db.String(50), unique=False, nullable=True)
     dodej_phone = db.Column(db.String(50), unique=False, nullable=True)
     
 # -------------------Firemní údaje -------------------------------------

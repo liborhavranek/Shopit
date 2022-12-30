@@ -100,7 +100,7 @@ $('#registration_phone').on('input', function(){
 
 $('#registration_phone').on('keydown', function(event) {
     // Allow only digits and the backspace key
-    if ((event.keyCode < 48 || event.keyCode > 57) && event.keyCode != 8) {
+    if ((event.keyCode < 48 || event.keyCode > 57) && event.keyCode != 8 && (event.keyCode < 96 || event.keyCode > 105)) {
         event.preventDefault();
     }
 });
@@ -140,4 +140,381 @@ $('#Password2').on('input', function(){
 
 });
 
+
+// -------------------------------- faktura first name --------------------------------
+
+$('.check-tag-faktura-first-name').css('visibility', 'hidden');
+$('#faktura_first_name').on('input', function() {
+    var fakturaFirstName = $(this).val();
+    if (fakturaFirstName.length < 3){
+        $('.check-tag-faktura-first-name').css('visibility', 'hidden');
+        $('.costumer_faktura_first_name_check').text("Jméno musí být alespoň tři znaky dlouhé.").show();
+    }else{
+        $('.check-tag-faktura-first-name').css('visibility', 'visible');
+        $('.costumer_faktura_first_name_check').text("Jméno musí být alespoň tři znaky dlouhé.").hide();
+    }
+});
+
+// -----------------------------faktura last name ---------------------------------------
+
+
+$('.check-tag-faktura-last-name').css('visibility', 'hidden');
+$('#faktura_last_name').on('input', function() {
+    var fakturaLastName = $(this).val();
+    if (fakturaLastName.length < 2){
+        $('.check-tag-faktura-last-name').css('visibility', 'hidden');
+        $('.costumer_faktura_last_name_check').text("Jméno musí být alespoň dva znaky dlouhé.").show();
+    }else{
+        $('.check-tag-faktura-last-name').css('visibility', 'visible');
+        $('.costumer_faktura_last_name_check').text("Jméno musí být alespoň dva znaky dlouhé.").hide();
+    }
+});
+
+
+// -----------------------------faktura city name ---------------------------------------
+
+
+$('.check-tag-faktura-city').css('visibility', 'hidden');
+$('#faktura_city').on('input', function() {
+    var fakturaLastName = $(this).val();
+    if (fakturaLastName.length < 2){
+        $('.check-tag-faktura-city').css('visibility', 'hidden');
+        $('.costumer_faktura_city_check').text("Jméno musí být alespoň dva znaky dlouhé.").show();
+    }else{
+        $('.check-tag-faktura-city').css('visibility', 'visible');
+        $('.costumer_faktura_city_check').text("Jméno musí být alespoň dva znaky dlouhé.").hide();
+    }
+});
+
+
+
+// -----------------------------faktura ulice ---------------------------------------
+
+
+
+
+
+$('.check-tag-faktura-zipcode').css('visibility', 'hidden');
+function updateCheckTagVisibility2() {
+    var fakturaStreet = $('#faktura_street').val();
+    var fakturaZipcode = $('#faktura_zipcode').val();
+    if (fakturaStreet.length < 2 || fakturaZipcode.length < 5) {
+        $('.check-tag-faktura-zipcode').css('visibility', 'hidden');
+    } else {
+        $('.check-tag-faktura-zipcode').css('visibility', 'visible');
+    }
+}
+
+$('#faktura_street').on('input', function(){
+    var fakturaStreet = $(this).val();
+    if (fakturaStreet.length < 2){
+        $('.costumer_faktura_street_check').text("Ulice musí mít alespoň dva znaky.").show();
+    }else{
+        $('.costumer_faktura_street_check').text("Ulice musí mít alespoň dva znaky.").hide();
+    }
+    updateCheckTagVisibility2();
+});
+
+$('#faktura_zipcode').on('input', function(){
+    var fakturaZipcode = $(this).val();
+    if (fakturaZipcode.length < 5){
+        $('.costumer_faktura_zipcode_check').text("5 čísel.").show();
+    }else{
+        $('.costumer_faktura_zipcode_check').text("5 čísel.").hide();
+    }
+    updateCheckTagVisibility2();
+});
+
+
+$('#faktura_zipcode').on('keydown', function(event) {
+    // Allow only digits and the backspace key
+    if ((event.keyCode < 48 || event.keyCode > 57) && event.keyCode != 8 && (event.keyCode < 96 || event.keyCode > 105)) {
+        event.preventDefault();
+    }
+});
+
+
+// -------------------------------- dodej first name --------------------------------
+
+$('.check-tag-dodej-first-name').css('visibility', 'hidden');
+$('#dodej_first_name').on('input', function() {
+    var dodejFirstName = $(this).val();
+    if (dodejFirstName.length < 3){
+        $('.check-tag-dodej-first-name').css('visibility', 'hidden');
+        $('.costumer_dodej_first_name_check').text("Jméno musí být alespoň tři znaky dlouhé.").show();
+    }else{
+        $('.check-tag-dodej-first-name').css('visibility', 'visible');
+        $('.costumer_dodej_first_name_check').text("Jméno musí být alespoň tři znaky dlouhé.").hide();
+    }
+});
+
+// -----------------------------dodej last name ---------------------------------------
+
+
+$('.check-tag-dodej-last-name').css('visibility', 'hidden');
+$('#dodej_last_name').on('input', function() {
+    var dodejLastName = $(this).val();
+    if (dodejLastName.length < 2){
+        $('.check-tag-dodej-last-name').css('visibility', 'hidden');
+        $('.costumer_dodej_last_name_check').text("Jméno musí být alespoň dva znaky dlouhé.").show();
+    }else{
+        $('.check-tag-dodej-last-name').css('visibility', 'visible');
+        $('.costumer_dodej_last_name_check').text("Jméno musí být alespoň dva znaky dlouhé.").hide();
+    }
+});
+
+
+// -----------------------------dodej company ---------------------------------------
+
+
+$('.check-tag-dodej-company').css('visibility', 'hidden');
+$('#dodej_company').on('input', function() {
+    var dodejCompany = $(this).val();
+    if (dodejCompany.length < 2){
+        $('.check-tag-dodej-company').css('visibility', 'hidden');
+        $('.costumer_dodej_company_check').text("Jméno firmy musí být alespoň dva znaky dlouhé.").show();
+    }else{
+        $('.check-tag-dodej-company').css('visibility', 'visible');
+        $('.costumer_dodej_company_check').text("Jméno firmy musí být alespoň dva znaky dlouhé.").hide();
+    }
+});
+
+
+// -----------------------------dodej city name ---------------------------------------
+
+
+$('.check-tag-dodej-city').css('visibility', 'hidden');
+$('#dodej_city').on('input', function() {
+    var dodejLastName = $(this).val();
+    if (dodejLastName.length < 2){
+        $('.check-tag-dodej-city').css('visibility', 'hidden');
+        $('.costumer_dodej_city_check').text("Jméno musí být alespoň dva znaky dlouhé.").show();
+    }else{
+        $('.check-tag-dodej-city').css('visibility', 'visible');
+        $('.costumer_dodej_city_check').text("Jméno musí být alespoň dva znaky dlouhé.").hide();
+    }
+});
+
+
+// -----------------------------dodej ulice ---------------------------------------
+
+
+
+$('.check-tag-dodej-zipcode').css('visibility', 'hidden');
+
+function updateCheckTagVisibility() {
+    var dodejStreet = $('#dodej_street').val();
+    var dodejZipcode = $('#dodej_zipcode').val();
+    if (dodejStreet.length < 2 || dodejZipcode.length < 5) {
+        $('.check-tag-dodej-zipcode').css('visibility', 'hidden');
+    } else {
+        $('.check-tag-dodej-zipcode').css('visibility', 'visible');
+    }
+}
+
+$('#dodej_street').on('input', function(){
+    var dodejStreet = $(this).val();
+    if (dodejStreet.length < 2){
+        $('.costumer_dodej_street_check').text("Ulice musí mít alespoň dva znaky.").show();
+    }else{
+        $('.costumer_dodej_street_check').text("Ulice musí mít alespoň dva znaky.").hide();
+    }
+    updateCheckTagVisibility();
+});
+
+$('#dodej_zipcode').on('input', function(){
+    var dodejZipcode = $(this).val();
+    if (dodejZipcode.length < 5){
+        $('.costumer_dodej_zipcode_check').text("5 čísel.").show();
+    }else{
+        $('.costumer_dodej_zipcode_check').text("5 čísel.").hide();
+    }
+    updateCheckTagVisibility();
+});
+
+
+$('#dodej_zipcode').on('keydown', function(event) {
+    // Allow only digits and the backspace key
+    if ((event.keyCode < 48 || event.keyCode > 57) && event.keyCode != 8 && (event.keyCode < 96 || event.keyCode > 105)) {
+        event.preventDefault();
+    }
+});
+
+// -----------------------------dodej info ---------------------------------------
+
+$('.check-tag-dodej-info').css('visibility', 'hidden');
+$('#dodej_info').on('input', function() {
+    var dodejInfo = $(this).val();
+    if (dodejInfo.length < 2){
+        $('.check-tag-dodej-info').css('visibility', 'hidden');
+        $('.costumer_dodej_info_check').text("Jméno musí být alespoň dva znaky dlouhé.").show();
+    }else{
+        $('.check-tag-dodej-info').css('visibility', 'visible');
+        $('.costumer_dodej_info_check').text("Jméno musí být alespoň dva znaky dlouhé.").hide();
+    }
+});
+
+
+// -------------------phone number form ----------------------------------
+
+$('#flag-dodej-selector').change(function() {
+    var selectedFlagOption = $(this).val();
+    if (selectedFlagOption == '+421') {
+        $('.flag-dodej').attr('src', '/static/images/czech-flag.png');
+    } else if (selectedFlagOption == '+420') {
+        $('.flag-dodej').attr('src', "/static/images/slovakia-flag.png");
+    }
+});
+
+
+
+$('#registration_dodej_phone').on('input', function(){
+    var dodejPhoneNumber = $(this).val();
+    $('.check-tag-phone').css('visibility', 'hidden');
+    if (dodejPhoneNumber.length === 9){
+        $('.check-tag-dodej-phone').css('visibility', 'visible');
+    }else{
+        $('.check-tag-dodej-phone').css('visibility', 'hidden');
+    }
+});
+
+
+
+$('#registration_dodej_phone').on('keydown', function(event) {
+    // Allow only digits and the backspace key
+    if ((event.keyCode < 48 || event.keyCode > 57) && event.keyCode != 8 && (event.keyCode < 96 || event.keyCode > 105)) {
+        event.preventDefault();
+    }
+});
+
+
+// -------------------firma ico ----------------------------------
+
+
+$('#registration_firma_ico').on('keydown', function(event) {
+    // Allow only digits and the backspace key
+    if ((event.keyCode < 48 || event.keyCode > 57) && event.keyCode != 8 && (event.keyCode < 96 || event.keyCode > 105)) {
+        event.preventDefault();
+    }
+});
+
+
+$('.check-tag-firma-ico').css('visibility', 'hidden');
+$('#registration_firma_ico').on('input', function(){
+    var firmaIco = $(this).val();
+    if (firmaIco.length === 8){
+        $('.check-tag-firma-ico').css('visibility', 'visible');
+        $('.costumer_firma_ico_check').text("IČO musí být dlouhé 8 čísel.").hide();
+    }else{
+        $('.check-tag-firma-ico').css('visibility', 'hidden');
+        $('.costumer_firma_ico_check').text("IČO musí být dlouhé 8 čísel.").show();
+        if (firmaIco.length === 0){
+            $('.costumer_firma_ico_check').text("IČO musí být dlouhé 8 čísel.").hide();
+        }
+    }
+
+});
+
+
+
+// -------------------firma dic ----------------------------------
+
+
+$('.check-tag-firma-dic').css('visibility', 'hidden');
+$('#registration_firma_dic').on('input', function(){
+    var firmaDic = $(this).val();
+    if (firmaDic.length > 9){
+        $('.check-tag-firma-dic').css('visibility', 'visible');
+        $('.costumer_firma_dic_check').text("DIČ musí být dlouhé alespoň 10 čísel.").hide();
+    }else{
+        $('.check-tag-firma-dic').css('visibility', 'hidden');
+        $('.costumer_firma_dic_check').text("DIČ musí být dlouhé alespoň 10 čísel.").show();
+        if (firmaDic.length === 0){
+            $('.costumer_firma_dic_check').text("DIČ musí být dlouhé alespoň 10 čísel.").hide();
+        }
+    }
+
+});
+
+
+
+
+// ------------------------------------Bankovni cislo -------------------------------------
+
+
+
+
+$('#registration_firma_bank_acc').on('keydown', function(event) {
+    // Allow only digits and the backspace key
+    if ((event.keyCode < 48 || event.keyCode > 57) && event.keyCode != 8 && (event.keyCode < 96 || event.keyCode > 105)) {
+        event.preventDefault();
+    }
+});
+
+
+$('#registration_firma_bank_number').on('keydown', function(event) {
+    // Allow only digits and the backspace key
+    if ((event.keyCode < 48 || event.keyCode > 57) && event.keyCode != 8 && (event.keyCode < 96 || event.keyCode > 105)) {
+        event.preventDefault();
+    }
+});
+
+
+
+
+var firmaBankAcc;
+var firmaBankNumber;
+
+function showCheckBankTag() {
+  if (firmaBankNumber.length === 4 && firmaBankAcc.length > 5) {
+    $('.check-tag-firma-bank-acc').css('visibility', 'visible');
+  } else {
+    $('.check-tag-firma-bank-acc').css('visibility', 'hidden');
+  }
+}
+
+$('#registration_firma_bank_acc').on('input', function() {
+  firmaBankAcc = $(this).val();
+  if (firmaBankAcc.length > 5){
+    $('.costumer_firma_bank_acc_check').text("Zadejte alespoň 6 čísel").hide();
+    showCheckBankTag();
+  } else {
+    $('.costumer_firma_bank_acc_check').text("Zadejte alespoň 6 čísel").show();
+    if (firmaBankAcc.length === 0){
+      $('.costumer_firma_bank_acc_check').text("Zadejte alespoň 6 čísel").hide();
+    }
+  }
+});
+
+$('#registration_firma_bank_number').on('input', function() {
+  firmaBankNumber = $(this).val();
+  if (firmaBankNumber.length > 3){
+    $('.costumer_firma_bank_number_check').text("4 čísla").hide();
+    showCheckBankTag();
+  } else {
+    $('.costumer_firma_bank_number_check').text("4 čísla").show();
+    if (firmaBankNumber.length === 0){
+      $('.costumer_firma_bank_number_check').text("4 čísla").hide();
+    }
+  }
+});
+
+//---------------------------------specificky symbol --------------------------------------
+
+$('#registration_firma_spec_symbol').on('keydown', function(event) {
+    // Allow only digits and the backspace key
+    if ((event.keyCode < 48 || event.keyCode > 57) && event.keyCode != 8 && (event.keyCode < 96 || event.keyCode > 105)) {
+        event.preventDefault();
+    }
+});
+
+$('.check-tag-firma-spec-symbol').css('visibility', 'hidden');
+$('#registration_firma_spec_symbol').on('input', function(){
+    var specSymbol = $(this).val();
+    if (specSymbol.length > 0){
+        $('.check-tag-firma-spec-symbol').css('visibility', 'visible');
+    }else{
+        $('.check-tag-firma-spec-symbol').css('visibility', 'hidden');
+    }
+});
 
