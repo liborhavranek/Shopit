@@ -14,16 +14,28 @@ def addcategory():
     categories = Category.query.all() 
     if request.method == 'POST':
         category = request.form.get("category")
-        new_category = Category(category=category, date_created=datetime.now())
-        db.session.add(new_category)
-        db.session.commit()
-        flash("Category added successfully!", "success")
-        return jsonify({
-            'flash_message': get_flashed_messages(with_categories=True),
-            'category': new_category.category,
-            'id': new_category.id,
-            'date_created': new_category.date_created
-        })
+        if len(category) < 3:
+            flash("Category have to minimal 3 char!", category="danger")
+            return jsonify({
+                'flash_message': get_flashed_messages(with_categories=True)
+            })
+        existing_category = Category.query.filter_by(category=category).first()
+        if existing_category:
+            flash("Categorie už existuje !", category="danger")
+            return jsonify({
+                'flash_message': get_flashed_messages(with_categories=True)
+            })
+        else:
+            new_category = Category(category=category, date_created=datetime.now())
+            db.session.add(new_category)
+            db.session.commit()
+            flash("Categorie byla přidána", category="success")
+            return jsonify({
+                'flash_message': get_flashed_messages(with_categories=True),
+                'category': new_category.category,
+                'id': new_category.id,
+                'date_created': new_category.date_created
+            })
     return render_template('addcategory.html', categories=categories)
 
 
