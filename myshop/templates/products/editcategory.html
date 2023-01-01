@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-fluid register-form-container ">
+
+
+<div class="row">
+<div class="col-3"> 
+
+    {% include 'side_navbar.html' %}
+</div>
+
+<div class="col-9">
+
+    <h1>Upravit kategorii</h1>
+
+    <form  id="edit-category-form" action="" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="text" name="edit_category" class="form-control">
+      <input type="submit" value="Upravit kategorii" class="btn btn-info tm-2">
+  </form>
+  
+  <div id="categories-list">
+      <ul>
+          {% for category in categories %}
+          <br>
+          {{ category.category }} / {{ category.id }} / {{ category.date_created }} <a href="/">update</a><br> 
+          
+          
+          {% endfor %}
+      </ul>
+  </div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+{% endblock content %}

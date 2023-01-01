@@ -11,7 +11,7 @@
 <h1 class="registrace py-5">Registrace zákazníka</h1>
 
 <form method="POST">
-
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <!-- emial label and input -->
   <div class="mb-3">
     

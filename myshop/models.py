@@ -50,3 +50,34 @@ class Costumer(db.Model, UserMixin):
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
     
     
+    
+    
+# class Product(db.Model, UserMixin):
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String(80), nullable=False)
+#     price = db.Column(db.Numeric(10,2), nullable=False)
+#     discount = db.Column(db.Integer, default=0)
+#     stock = db.Column(db.Integer, nullable=False)
+#     sold = db.Column(db.Integer)
+#     size = db.Column(db.Text, nullable=False)
+#     description = db.Column(db.Text, nullable=False)
+#     pub_date = db.Column(db.DateTime, nullable=False,default=datetime.utcnow)
+    
+    
+# pridat rating, recenze, categorie, brand, udelat color s id brand, kategorie
+
+
+
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    category = db.Column(db.String(30), nullable=False, unique=True)
+    date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+
+    
+    
+class Brand(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    brand = db.Column(db.String(30), nullable=False, unique=True)
+    date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+
+

@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_wtf.csrf import CSRFProtect
 from flask_assets import Environment, Bundle
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -16,15 +17,16 @@ db = SQLAlchemy()
 DB_NAME = "myshop.db"
 
 login_manager = LoginManager()
-
+csrf = CSRFProtect()
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+    app.config['SECRET_KEY'] = 'secret_key'
     
     
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
+    csrf.init_app(app)
     
     
     from .models import Costumer
@@ -36,6 +38,9 @@ def create_app():
     @login_manager.user_loader
     def load_user(id):
         return Costumer.query.get(id)
+      
+      
+    
 
 
     from .admin import admin
@@ -52,10 +57,10 @@ def create_app():
     assets = Environment(app) # create an Environment instance
 
     bundles = {  # define nested Bundle
-  'your_style': Bundle(
-            'SCSS/your.scss',
+  'index_style': Bundle(
+            'SCSS/index.scss',
             filters='libsass',
-            output='Gen/your.css',
+            output='Gen/index.css',
   ),
   'register_style': Bundle(
             'SCSS/register.scss',

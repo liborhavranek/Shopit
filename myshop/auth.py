@@ -178,7 +178,7 @@ def login():
             if check_password_hash(costumer.password, password):
                 flash("Úspěšně jsi se přihlásil", category='success')
                 login_user(costumer, remember=True)
-                return render_template("auth.html", costumer=current_user)
+                return render_template("index.html", costumer=current_user)
             else:
                 flash('Zadal jsi nesprávné heslo', category='error')
         else:

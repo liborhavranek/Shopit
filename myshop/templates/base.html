@@ -18,7 +18,7 @@
     {% endassets %}
 
 
-    {% assets "your_style" %}
+    {% assets "index_style" %}
     <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
     {% endassets %}
 
@@ -36,7 +36,7 @@
   <body>
     
     {% include 'navbar.html' %}
-    
+    <div class="messages">
     {% with messages =
       get_flashed_messages(with_categories=True) %} {% if messages %} {% for
       category, message in messages %} {% if category == "error" %}
@@ -54,7 +54,7 @@
         {{ message }}
       </div>
       {% endif %} {% endfor %} {% endif %} {% endwith %}
-
+    </div>
 {% block content %} 
 
 
@@ -69,6 +69,7 @@
     ></script>
     <script src="{{ url_for('static', filename='js/myscript.js') }}"></script>
     <script src="{{ url_for('static', filename='js/myjquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/product.js') }}"></script>
   </body>
 
 </html>
