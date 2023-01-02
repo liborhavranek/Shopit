@@ -45,10 +45,11 @@ $('#add-category-form').on('submit', function(event) {
 
 $('#edit-category-form').on('submit', function(event) {
   var id = $(this).find('input[name="value_id_for_jquery"]').val();
-  event.preventDefault(); // prevent the default form submission behavior
+  // browser dont refresh
+  event.preventDefault(); 
   var formData = $(this).serialize();
   $.ajax({
-    url: '/editcategory/' + id,  // id is the ID of the category you want to edit
+    url: '/editcategory/' + id,
     type: 'POST',
     data: formData,
     success: function(data) {
