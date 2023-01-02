@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-fluid register-form-container ">
+
+
+<div class="row">
+<div class="col-3"> 
+
+    {% include 'side_navbar.html' %}
+</div>
+
+<div class="col-9 ">
+
+
+
+ <h1 class="text-center">Přidat product</h1>
+
+
+ <form  id="add-product-form" action="" method="POST" enctype="multipart/form-data" class="form-inline">
+
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="product" class="form-label">Produkt</label>
+    <input type="text" name="product" class="form-control">
+    <label for="price" class="form-label">Cena</label>
+    <input type="text" name="price" class="form-control">
+
+    <label for="brand">Add brand</label>
+    <select name="brand" id="brand" class="form-control" required>
+        <option value="">Select a brand</option>
+        {% for brand in brands %}
+        <option value="{{ brand.id }}">{{ brand.brand }}</option>
+        {% endfor %}
+    </select>
+
+    <input type="submit" value="Přidat produkt" class="btn btn-info tm-2">
+
+  </form>
+
+<div>
+    {% for product in products %}
+    <p> {{product.product}}/{{product.price}}/{{product.brand.brand}}</p>
+    {% endfor %}
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+</div>
+{% endblock content %}

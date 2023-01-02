@@ -1,7 +1,7 @@
 from flask import Flask, Blueprint, render_template, request, flash, jsonify, redirect, url_for, get_flashed_messages
 from flask_login import login_user, logout_user, login_required, current_user
 from datetime import datetime
-from .models import Category,Brand,Color
+from .models import Category,Brand,Color,Product
 from . import db
 from random import randint
 products = Blueprint('products', __name__, template_folder='templates/products')
@@ -212,3 +212,27 @@ def deletecolor(id):
     db.session.delete(color)
     db.session.commit()
     return jsonify({'message': 'Barva byla smazána'})
+  
+  
+  
+  
+@products.route('/addproduct/', methods=['GET', 'POST'])
+@login_required
+def addproduct():
+    brands = Brand.query.all()
+    products = Product.query.all() 
+    if request.method == 'POST':
+      product = request.form.get("product").title()
+      price = request.form.get('price')
+      brand_id = request.form.get('brand')
+      if len(product) < 3:
+          flash("Produkt musí mít minimálně 3 znaky", category="danger")
+      existing_product = Product.query.filter_by(product=product).first()
+      if existing_product:
+          flash("Produkt už existuje !", category="danger")
+      else:
+          brand = Brand.query.get(brand_id)
+          new_product= Product(product=product, price=price, brand=brand)
+          db.session.add(new_product)
+          db.session.commit()
+    return render_template('addproduct.html', products=products, brands=brands)
