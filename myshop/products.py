@@ -8,6 +8,19 @@ products = Blueprint('products', __name__, template_folder='templates/products')
 
 
 
+# Pokud přidám kategorii nebo budu psát kód s podmínkami např jako mám tady musí být delší 
+# než dva znaky tak můžu každou podmínku vypsat a pod ní vrátit jsonify, kód tak bude 
+# velmi dlouhý u více podmínek proto jsem si vytvořil funkci handle_response a proto můžu 
+# pod podmínkou flashnout zprávu a přivolat funkci handle_responze, kód tak bude kratší při více
+# podmínkách
+
+def handle_response(data={}):
+    return jsonify({
+        'flash_message': get_flashed_messages(with_categories=True)
+    } if not data else data)
+
+
+
 @products.route('/addcategory', methods=['GET', 'POST'])
 @login_required
 def addcategory():
@@ -16,21 +29,17 @@ def addcategory():
         category = request.form.get("category")
         if len(category) < 3:
             flash("Category have to minimal 3 char!", category="danger")
-            return jsonify({
-                'flash_message': get_flashed_messages(with_categories=True)
-            })
+            return handle_response()
         existing_category = Category.query.filter_by(category=category).first()
         if existing_category:
             flash("Categorie už existuje !", category="danger")
-            return jsonify({
-                'flash_message': get_flashed_messages(with_categories=True)
-            })
+            return handle_response()
         else:
             new_category = Category(category=category, date_created=datetime.now())
             db.session.add(new_category)
             db.session.commit()
             flash("Categorie byla přidána", category="success")
-            return jsonify({
+            return handle_response(data={
                 'flash_message': get_flashed_messages(with_categories=True),
                 'category': new_category.category,
                 'id': new_category.id,
@@ -42,47 +51,40 @@ def addcategory():
 
 
 
+@products.route('/editcategory/<int:id>', methods=['GET','POST'])
+@login_required
+def editcategory(id):
+    category = Category.query.filter_by(id=id).first()
+    if request.method == 'POST':
+        new_category = request.form.get("edit_category")
+        if len(new_category) < 3:
+            flash("Categorie musí mít minimálně 3 znaky!", category="danger")
+            return handle_response()
+        existing_category = Category.query.filter_by(category=new_category).first()
+        if existing_category:
+            flash("Categorie už existuje!", category="danger")
+            return handle_response()
+        else:
+            category.category = new_category
+            db.session.commit()
+            flash('Category byla editována.', category='success')
+            return handle_response(data={
+            'flash_message': get_flashed_messages(with_categories=True),
+            'category': category.category,
+            })
+    return render_template('editcategory.html', category=category)
 
 
 
+@products.route('/deletecategory/<int:id>', methods=['DELETE'])
+@login_required
+def deletecategory(id):
+    category = Category.query.filter_by(id=id).first()
+    db.session.delete(category)
+    db.session.commit()
+    return jsonify({'message': 'Category deleted successfully'})
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# @products.route('/editcategory/<int:id>', methods=['POST', 'GET'])
-# @login_required
-# def editcategory(id):
-#     categories = Category.query.all() 
-#     if request.method == 'POST':
-#         category = Category.query.filter_by(id=id).first()
-#         edit_category = request.form.get("edit_category")
-#         if not edit_category:
-#             flash('Název kategorie nesmí být prázdný', category='error')
-#         else:
-#             category_exist = Category.query.filter_by(category=edit_category).first()
-#             if category_exist:
-#                 flash('Tato kategorie již existuje', category='error')
-#             elif len(edit_category) < 3:
-#                 flash('Název kategorie musí mít alespoň 3 znaky', category='error')
-#             else:
-#                 category.category = edit_category
-#                 db.session.commit()
-#                 flash('Kategorie byla upravena.', category='success')
-#                 return render_template('editcategory.html', categories=categories)
-#     return render_template('editcategory.html', categories=categories)
 
 
 

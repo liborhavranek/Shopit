@@ -10,33 +10,57 @@
     {% include 'side_navbar.html' %}
 </div>
 
-<div class="col-9">
+<div class="col-9 ">
 
 
+  <div class="addcategory-form py-5 px-5">
+ <h1 class="text-center">Přidat kategorii</h1>
 
- <h1>Přidat kategorii</h1>
 
-<form  id="add-category-form" action="" method="POST" enctype="multipart/form-data">
+ <div class="addcategory-form-div w-75 py-5">
+<form  id="add-category-form" action="" method="POST" enctype="multipart/form-data" class="form-inline">
+  <div class="row">
+    <div class="col">
   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
   <input type="text" name="category" class="form-control">
+</div>
+<div class="col">
   <input type="submit" value="Přidat kategorii" class="btn btn-info tm-2">
+</div>
+</div>
 </form>
-
+</div>
 <div id="categories-list">
-  <ul>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Kategorie</th>
+        <th scope="col">Datum vytvření</th>
+        <th scope="col">Upravit</th>
+        <th scope="col">Smazat</th>
+      </tr>
+    </thead>
+    <tbody>
       {% for category in categories %}
-      <br>
-      {{ category.category }} / {{ category.id }} / {{ category.date_created }} <a href="/editcategory/{{ category.id }}">update</a><br> 
-
-
+      <tr>
+        <th scope="row">{{ category.id }}</th>
+        <td>{{ category.category }}</td>
+        <td>{{ category.date_created }}</td>
+        <td><a href="/editcategory/{{ category.id }}">update</a></td>
+        <td><a id="category-{{category.id}}" data-id="{{ category.id }}" class="btn btn-danger btn-sm delete-category-button"href="/deletecategory/{{ category.id }}">Smazat</a></td>
+      </tr>
       {% endfor %}
-  </ul>
+    </tbody>
+  </table>
+
 </div>
 
 
 </div>
 
-
+</div>
 
 </div>
 
