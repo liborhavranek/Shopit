@@ -63,6 +63,16 @@ class Costumer(db.Model, UserMixin):
 #     description = db.Column(db.Text, nullable=False)
 #     pub_date = db.Column(db.DateTime, nullable=False,default=datetime.utcnow)
     
+#     brand_id = db.Column(db.Integer, db.ForeignKey('brand.id'), nullable=False)
+#     brand = db.relationship('Brand', backref=db.backref('posts', lazy=True))
+
+#     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
+#     category = db.relationship('Category',backref=db.backref('posts', lazy=True))
+
+#     image_1 = db.Column(db.String(150), nullable=False, default='image.jpg')
+#     image_2 = db.Column(db.String(150), nullable=False, default='image.jpg')
+#     image_3 = db.Column(db.String(150), nullable=False, default='image.jpg')
+    
     
 # pridat rating, recenze, categorie, brand, udelat color s id brand, kategorie
 
@@ -81,3 +91,7 @@ class Brand(db.Model):
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
 
 
+class Color(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    color = db.Column(db.String(30), nullable=False, unique=True)
+    date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
