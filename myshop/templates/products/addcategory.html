@@ -15,7 +15,7 @@
 
   <div class="addcategory-form py-5 px-5">
  <h1 class="text-center">Přidat kategorii</h1>
-
+<h3>{{current_user.username}}</h3>
 
  <div class="addcategory-form-div w-75 py-5">
 <form  id="add-category-form" action="" method="POST" enctype="multipart/form-data" class="form-inline">
@@ -48,7 +48,7 @@
         <th scope="row">{{ category.id }}</th>
         <td>{{ category.category }}</td>
         <td>{{ category.date_created }}</td>
-        <td><a href="/editcategory/{{ category.id }}">update</a></td>
+        <td><a class="btn btn-info btn-sm" href="/editcategory/{{ category.id }}">Upravit kategorii</a></td>
         <td><a id="category-{{category.id}}" data-id="{{ category.id }}" class="btn btn-danger btn-sm delete-category-button"href="/deletecategory/{{ category.id }}">Smazat</a></td>
       </tr>
       {% endfor %}

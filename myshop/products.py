@@ -28,17 +28,17 @@ def addcategory():
     if request.method == 'POST':
         category = request.form.get("category")
         if len(category) < 3:
-            flash("Category have to minimal 3 char!", category="danger")
+            flash("Kategorie musí mít minimálně 3 znaky", category="danger")
             return handle_response()
         existing_category = Category.query.filter_by(category=category).first()
         if existing_category:
-            flash("Categorie už existuje !", category="danger")
+            flash("Kategorie už existuje !", category="danger")
             return handle_response()
         else:
             new_category = Category(category=category, date_created=datetime.now())
             db.session.add(new_category)
             db.session.commit()
-            flash("Categorie byla přidána", category="success")
+            flash("Kategorie byla přidána", category="success")
             return handle_response(data={
                 'flash_message': get_flashed_messages(with_categories=True),
                 'category': new_category.category,
@@ -58,11 +58,11 @@ def editcategory(id):
     if request.method == 'POST':
         new_category = request.form.get("edit_category")
         if len(new_category) < 3:
-            flash("Categorie musí mít minimálně 3 znaky!", category="danger")
+            flash("Kategorie musí mít minimálně 3 znaky!", category="danger")
             return handle_response()
         existing_category = Category.query.filter_by(category=new_category).first()
         if existing_category:
-            flash("Categorie už existuje!", category="danger")
+            flash("Kategorie už existuje!", category="danger")
             return handle_response()
         else:
             category.category = new_category
@@ -82,27 +82,70 @@ def deletecategory(id):
     category = Category.query.filter_by(id=id).first()
     db.session.delete(category)
     db.session.commit()
-    return jsonify({'message': 'Category deleted successfully'})
+    return jsonify({'message': 'Kategorie byla smazána'})
 
 
 
 
 
 
-# @products.route('/addbrand', methods=['GET', 'POST'])
-# @login_required
-# def addbrand():
-#     brands = Brand.query.all() 
-#     if request.method == 'POST':
-#         brand = request.form.get("brand")
-#         brand_exist = Brand.query.filter_by(brand=brand).first()
-#         if brand_exist:
-#             flash('Tato značka již existuje', category='error')
-#         else:
-#             new_brand = Brand(brand=brand)
-#             db.session.add(new_brand)
-#             db.session.commit()
-#             flash('Značka byla přidána.', category='success')
-#             return render_template('addbrand.html')
-#     return render_template('addbrand.html', brands=brands)
-
+@products.route('/addbrand', methods=['GET', 'POST'])
+@login_required
+def addbrand():
+    brands = Brand.query.all() 
+    if request.method == 'POST':
+        brand = request.form.get("brand")
+        if len(brand) < 3:
+            flash("Značka musí mít alespoň tři znaky!", category="danger")
+            return handle_response()
+        existing_brand = Brand.query.filter_by(brand=brand).first()
+        if existing_brand:
+            flash("Značka už existuje !", category="danger")
+            return handle_response()
+        else:
+            new_brand = Brand(brand=brand, date_created=datetime.now())
+            db.session.add(new_brand)
+            db.session.commit()
+            flash("Značka byla přidána", category="success")
+            return handle_response(data={
+                'flash_message': get_flashed_messages(with_categories=True),
+                'brand': new_brand.brand,
+                'id': new_brand.id,
+                'date_created': new_brand.date_created
+            })
+    return render_template('addbrand.html', brands=brands)
+  
+  
+  
+@products.route('/editbrand/<int:id>', methods=['GET','POST'])
+@login_required
+def editbrand(id):
+    brand = Brand.query.filter_by(id=id).first()
+    if request.method == 'POST':
+        new_brand = request.form.get("edit_brand")
+        if len(new_brand) < 3:
+            flash("Značka musí mít minimálně 3 znaky!", category="danger")
+            return handle_response()
+        existing_brand = Brand.query.filter_by(brand=new_brand).first()
+        if existing_brand:
+            flash("Značka už existuje!", category="danger")
+            return handle_response()
+        else:
+            brand.brand = new_brand
+            db.session.commit()
+            flash('Značka byla upravena.', category='success')
+            return handle_response(data={
+            'flash_message': get_flashed_messages(with_categories=True),
+            'brand': brand.brand,
+            })
+    return render_template('editbrand.html', brand=brand)
+  
+  
+  
+@products.route('/deletebrand/<int:id>', methods=['DELETE'])
+@login_required
+def deletebrand(id):
+    brand = Brand.query.filter_by(id=id).first()
+    db.session.delete(brand)
+    db.session.commit()
+    return jsonify({'message': 'Značka byla smazána'})
