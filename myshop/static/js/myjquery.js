@@ -4,6 +4,8 @@
     $('.costumer_email_check').hide();
     $('#registration_email').on('input', function() {
       var email = $(this).val();
+        // Get the CSRF token from the form
+    var csrf_token = $('input[name=csrf_token]').val();
       var emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
       if(!emailRegEx.test(email) && email.length > 10) {
         $('.costumer_email_check').text("Prosím zadejte platný formát emailové adresy.").show();
@@ -14,6 +16,7 @@
         $.ajax({
           url: '/check-email',
           method: 'POST',
+          headers: { 'X-CSRFToken': csrf_token },
           data: {'email': email},
           success: function(data) {
             if (data == 'taken') {
@@ -43,6 +46,8 @@
     $('.check-tag-username').css('visibility', 'hidden');
     $('#registration_username').on('input', function(){
         var username =  $(this).val();
+          // Get the CSRF token from the form
+            var csrf_token = $('input[name=csrf_token]').val();
         $('.costumer_username_check').hide(); // hide the message element before making the AJAX request
         if (username.length === 0) { // check if the form is empty
             $('.check-tag-username').css('visibility', 'hidden');
@@ -56,6 +61,7 @@
         $.ajax({
         url: '/check-username',
         method: 'POST',
+        headers: { 'X-CSRFToken': csrf_token },
         data: {'username': username},
         success: function(data) {
             if (data == 'taken' ) {

@@ -59,7 +59,7 @@ class Brand(db.Model):
     
     
     
-class Product(db.Model, UserMixin):
+class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     product = db.Column(db.String(80), nullable=False)
     price = db.Column(db.Numeric(10,2), nullable=False)
