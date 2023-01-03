@@ -50,52 +50,55 @@ class Costumer(db.Model, UserMixin):
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
     
     
-class Brand(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    brand = db.Column(db.String(30), nullable=False, unique=True)
-    date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
-    products = db.relationship('Product', backref=db.backref('brand', lazy=True), cascade="all, delete")
 
-    
+
+
     
     
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     product = db.Column(db.String(80), nullable=False)
     price = db.Column(db.Numeric(10,2), nullable=False)
-    brand_id = db.Column(db.Integer, db.ForeignKey('brand.id', ondelete="CASCADE"), nullable=True)
-
+    discount = db.Column(db.Integer, default=0)
+    stock = db.Column(db.Integer, nullable=False)
+    sold = db.Column(db.Integer, default=0)
+    size = db.Column(db.Text, nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    pub_date = db.Column(db.DateTime, nullable=False,default=datetime.utcnow)
     
-
-
-
-
-
-
-
-
-
-
-
-    # category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
-    # category = db.relationship('Category',backref=db.backref('posts', lazy=True))
-
+    
+    
+    brand_id = db.Column(db.Integer, db.ForeignKey('brand.id', ondelete="CASCADE"), nullable=True)
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id', ondelete="CASCADE"), nullable=True)
+    color_id = db.Column(db.Integer, db.ForeignKey('color.id', ondelete="CASCADE"), nullable=True)
+    
+    
+    
     # image_1 = db.Column(db.String(150), nullable=True, default='image.jpg')
     # image_2 = db.Column(db.String(150), nullable=True, default='image.jpg')
     # image_3 = db.Column(db.String(150), nullable=True, default='image.jpg')
     
     
 # pridat rating, recenze, categorie, brand, udelat color s id brand, kategorie
+    
+
+class Brand(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    brand = db.Column(db.String(30), nullable=False, unique=True)
+    date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    products = db.relationship('Product', backref=db.backref('brand', lazy=True), cascade="all, delete")
 
 
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    category = db.Column(db.String(30), nullable=False, unique=True)
+    date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    products = db.relationship('Product', backref=db.backref('category', lazy=True), cascade="all, delete")
 
 
 class Color(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     color = db.Column(db.String(30), nullable=False, unique=True)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    products = db.relationship('Product', backref=db.backref('color', lazy=True), cascade="all, delete")
     
-class Category(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    category = db.Column(db.String(30), nullable=False, unique=True)
-    date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
